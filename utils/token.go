@@ -24,8 +24,9 @@ func CreateToken(ttl time.Duration, payload interface{}, privateKey string) (str
 	claims := make(jwt.MapClaims)
 	claims["sub"] = payload
 	claims["exp"] = now.Add(ttl).Unix()
-	claims["iat"] = now.Unix()
 	claims["nbf"] = now.Unix()
+	claims["iat"] = now.Unix()
+	
 
 	token, err := jwt.NewWithClaims(jwt.SigningMethodRS256, claims).SignedString(key)
 
